@@ -25,7 +25,7 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
       lang="en"
       className={`${plusJakarta.variable} ${geistMono.variable} h-full antialiased`}
     >
-      <body className="page-atmosphere min-h-full font-sans text-foreground">
+      <body className="page-atmosphere h-dvh overflow-hidden font-sans text-foreground">
         <div className="noise-overlay" aria-hidden />
         {children}
       </body>

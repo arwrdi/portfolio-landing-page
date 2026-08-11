@@ -2,73 +2,39 @@
 
 import { List, X } from "@phosphor-icons/react";
 import Image from "next/image";
-import { useEffect, useState } from "react";
+import { useState } from "react";
+import { useSlides } from "@/components/slide-provider";
 import { site } from "@/lib/data";
+import { slides, type SlideId } from "@/lib/slides";
 
-const links = [
-  { href: "#about", label: "About" },
-  { href: "#skills", label: "Skills" },
-  { href: "#experience", label: "Experience" },
-  { href: "#projects", label: "Projects" },
-  { href: "#certifications", label: "Certifications" },
-  { href: "#contact", label: "Contact" },
-] as const;
-
-type SectionHref = (typeof links)[number]["href"];
+const navLinks = [
+  { id: "about" as const, label: "About" },
+  { id: "skills" as const, label: "Skills" },
+  { id: "experience" as const, label: "Experience" },
+  { id: "projects" as const, label: "Projects" },
+  { id: "contact" as const, label: "Contact" },
+];
 
 function linkClass(active: boolean) {
-  return active
-    ? "text-accent"
-    : "text-muted hover:text-foreground";
+  return active ? "text-accent" : "text-muted hover:text-foreground";
 }
 
 export function Nav() {
   const [open, setOpen] = useState(false);
-  const [active, setActive] = useState<SectionHref | "#top" | null>(null);
+  const { active, goTo } = useSlides();
 
-  useEffect(() => {
-    const sectionIds = links.map((link) => link.href.slice(1));
-
-    const updateActive = () => {
-      const navOffset = 96;
-      const scrollBottom =
-        window.scrollY + window.innerHeight >=
-        document.documentElement.scrollHeight - 48;
-
-      if (scrollBottom) {
-        setActive("#contact");
-        return;
-      }
-
-      let current: SectionHref | "#top" | null = "#top";
-
-      for (const id of sectionIds) {
-        const el = document.getElementById(id);
-        if (!el) continue;
-        if (el.getBoundingClientRect().top - navOffset <= 0) {
-          current = `#${id}` as SectionHref;
-        }
-      }
-
-      setActive(current === "#top" ? null : current);
-    };
-
-    updateActive();
-    window.addEventListener("scroll", updateActive, { passive: true });
-    window.addEventListener("resize", updateActive);
-    return () => {
-      window.removeEventListener("scroll", updateActive);
-      window.removeEventListener("resize", updateActive);
-    };
-  }, []);
+  const jump = (id: SlideId) => {
+    goTo(id);
+    setOpen(false);
+  };
 
   return (
-    <header className="fixed inset-x-0 top-0 z-50 border-b border-border/50 bg-bg/70 backdrop-blur-xl">
-      <nav className="mx-auto flex h-16 max-w-[1400px] items-center justify-between gap-4 px-4 md:h-[72px] md:px-8">
-        <a
-          href="#top"
-          className="flex shrink-0 items-center gap-2.5 text-lg font-bold tracking-tight text-foreground"
-          onClick={() => setActive(null)}
+    <header className="pointer-events-none fixed inset-x-0 top-0 z-50">
+      <nav className="pointer-events-auto mx-auto flex h-16 max-w-[1400px] items-center justify-between gap-4 px-4 md:h-[72px] md:px-8">
+        <button
+          type="button"
+          onClick={() => jump("top")}
+          className="flex shrink-0 items-center gap-2.5 rounded-full border border-white/10 bg-bg/70 px-3 py-1.5 text-lg font-bold tracking-tight text-foreground backdrop-blur-xl"
         >
           <Image
             src="/images/logo-ar-white.png"
@@ -78,44 +44,44 @@ export function Nav() {
             className="h-7 w-auto object-contain md:h-8"
             priority
           />
-          <span>{site.name.toUpperCase()}.</span>
-        </a>
+          <span className="hidden sm:inline">{site.name.toUpperCase()}.</span>
+        </button>
 
-        <ul className="hidden items-center gap-7 lg:flex">
-          {links.map((link) => {
-            const isActive = active === link.href;
+        <ul className="hidden items-center gap-1 rounded-full border border-white/10 bg-bg/70 px-2 py-1.5 backdrop-blur-xl lg:flex">
+          {navLinks.map((link) => {
+            const isActive = active === link.id;
             return (
-              <li key={link.href}>
-                <a
-                  href={link.href}
+              <li key={link.id}>
+                <button
+                  type="button"
                   aria-current={isActive ? "true" : undefined}
-                  className={`relative text-sm font-medium transition-colors ${linkClass(isActive)}`}
-                  onClick={() => setActive(link.href)}
+                  className={`relative px-3 py-1.5 text-sm font-medium transition-colors ${linkClass(isActive)}`}
+                  onClick={() => jump(link.id)}
                 >
                   {link.label}
                   <span
                     aria-hidden
-                    className={`absolute -bottom-1 left-0 h-0.5 w-full origin-left rounded-full bg-accent transition-transform duration-300 ${
+                    className={`absolute inset-x-2 -bottom-0.5 h-0.5 origin-left rounded-full bg-accent transition-transform duration-300 ${
                       isActive ? "scale-x-100" : "scale-x-0"
                     }`}
                   />
-                </a>
+                </button>
               </li>
             );
           })}
         </ul>
 
-        <a
-          href="#contact"
+        <button
+          type="button"
+          onClick={() => jump("contact")}
           className="hidden h-10 items-center rounded-full bg-accent px-5 text-sm font-semibold text-bg accent-glow transition-colors hover:bg-accent-hover md:inline-flex"
-          onClick={() => setActive("#contact")}
         >
           Get in Touch
-        </a>
+        </button>
 
         <button
           type="button"
-          className="inline-flex h-10 w-10 items-center justify-center rounded-2xl border border-border text-foreground lg:hidden"
+          className="inline-flex h-10 w-10 items-center justify-center rounded-2xl border border-border bg-bg/70 text-foreground backdrop-blur-xl lg:hidden"
           aria-expanded={open}
           aria-controls="mobile-nav"
           aria-label={open ? "Close menu" : "Open menu"}
@@ -128,46 +94,43 @@ export function Nav() {
       {open ? (
         <div
           id="mobile-nav"
-          className="border-t border-border bg-bg-elevated px-4 py-4 lg:hidden"
+          className="pointer-events-auto border-t border-border bg-bg-elevated/95 px-4 py-4 backdrop-blur-xl lg:hidden"
         >
-          <ul className="flex flex-col gap-2">
-            {links.map((link) => {
-              const isActive = active === link.href;
+          <ul className="flex flex-col gap-1">
+            {navLinks.map((link) => {
+              const isActive = active === link.id;
               return (
-                <li key={link.href}>
-                  <a
-                    href={link.href}
-                    aria-current={isActive ? "true" : undefined}
-                    className={`block rounded-xl px-3 py-2 text-base font-medium transition-colors ${
+                <li key={link.id}>
+                  <button
+                    type="button"
+                    className={`block w-full rounded-xl px-3 py-2 text-left text-base font-medium transition-colors ${
                       isActive
                         ? "bg-accent-soft text-accent"
                         : "text-muted hover:text-foreground"
                     }`}
-                    onClick={() => {
-                      setActive(link.href);
-                      setOpen(false);
-                    }}
+                    onClick={() => jump(link.id)}
                   >
                     {link.label}
-                  </a>
+                  </button>
                 </li>
               );
             })}
             <li>
-              <a
-                href="#contact"
+              <button
+                type="button"
                 className="mt-2 inline-flex h-11 w-full items-center justify-center rounded-full bg-accent text-sm font-semibold text-bg"
-                onClick={() => {
-                  setActive("#contact");
-                  setOpen(false);
-                }}
+                onClick={() => jump("contact")}
               >
                 Get in Touch
-              </a>
+              </button>
             </li>
           </ul>
         </div>
       ) : null}
+
+      <span className="sr-only">
+        Slides: {slides.map((s) => s.label).join(", ")}
+      </span>
     </header>
   );
 }

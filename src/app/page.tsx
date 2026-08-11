@@ -1,25 +1,37 @@
+"use client";
+
+import { useRef } from "react";
 import { About } from "@/components/about";
-import { Certifications } from "@/components/certifications";
+import { BrandLayout } from "@/components/brand-name";
 import { Contact } from "@/components/contact";
 import { Experience } from "@/components/experience";
 import { Hero } from "@/components/hero";
 import { Nav } from "@/components/nav";
 import { Projects } from "@/components/projects";
+import { SlideIndicator } from "@/components/slide-indicator";
+import { SlideProvider } from "@/components/slide-provider";
 import { TechStack } from "@/components/tech-stack";
 
 export default function Home() {
+  const scrollerRef = useRef<HTMLElement>(null);
+
   return (
-    <>
-      <Nav />
-      <main>
-        <Hero />
-        <About />
-        <TechStack />
-        <Experience />
-        <Projects />
-        <Certifications />
-      </main>
-      <Contact />
-    </>
+    <SlideProvider containerRef={scrollerRef}>
+      <BrandLayout>
+        <Nav />
+        <main
+          ref={scrollerRef}
+          className="h-dvh w-full snap-y snap-mandatory overflow-x-hidden overflow-y-auto overscroll-y-contain [scroll-behavior:auto]"
+        >
+          <Hero />
+          <About />
+          <TechStack />
+          <Experience />
+          <Projects />
+          <Contact />
+        </main>
+        <SlideIndicator />
+      </BrandLayout>
+    </SlideProvider>
   );
 }

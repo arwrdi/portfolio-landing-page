@@ -1,91 +1,94 @@
 "use client";
 
 import {
-  ArrowUp,
   EnvelopeSimple,
   GithubLogo,
   LinkedinLogo,
 } from "@phosphor-icons/react";
 import { motion, useReducedMotion } from "motion/react";
 import { site } from "@/lib/data";
+import { slideClassName } from "@/lib/slides";
+import { useSlides } from "@/components/slide-provider";
 
 export function Contact() {
   const reduce = useReducedMotion();
+  const { goTo } = useSlides();
 
   return (
-    <footer id="contact" className="relative border-t border-border py-24 md:py-32">
-      <div className="mx-auto max-w-[1400px] px-4 md:px-8">
+    <section id="contact" className={slideClassName}>
+      <div className="relative z-10 mx-auto flex w-full max-w-3xl flex-col items-center text-center">
         <motion.div
-          className="glass-panel flex flex-col gap-8 p-8 md:flex-row md:items-end md:justify-between md:p-10"
-          initial={reduce ? false : { opacity: 0, y: 24 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true, amount: 0.35 }}
-          transition={{ duration: 0.65, ease: [0.16, 1, 0.3, 1] }}
+          className="glass-panel card-glow w-full p-8 md:p-10"
+          initial={reduce ? false : { opacity: 0, y: 36, scale: 0.95 }}
+          whileInView={{ opacity: 1, y: 0, scale: 1 }}
+          viewport={{ once: false, amount: 0.4 }}
+          transition={{ type: "spring", stiffness: 120, damping: 16 }}
         >
-          <div>
-            <h2 className="text-3xl font-bold tracking-tight text-foreground md:text-4xl">
-              Let&apos;s build something together.
-            </h2>
-            <p className="mt-3 max-w-[40ch] text-sm text-muted md:text-base">
-              Open to freelance and contract work across mobile and web.
-            </p>
+          <p className="font-mono text-xs uppercase tracking-[0.2em] text-accent">
+            Contact
+          </p>
+          <h2 className="mt-3 text-3xl font-bold tracking-tight text-foreground md:text-4xl">
+            Let&apos;s build something together.
+          </h2>
+          <p className="mx-auto mt-3 max-w-[40ch] text-sm text-muted md:text-base">
+            Open to freelance and contract work across mobile and web.
+          </p>
 
-            <ul className="mt-8 flex flex-col gap-3 sm:flex-row sm:flex-wrap sm:gap-6">
-              <li>
-                <a
-                  href={`mailto:${site.email}`}
-                  className="inline-flex items-center gap-2 text-sm text-muted transition-colors hover:text-accent"
-                >
-                  <EnvelopeSimple size={18} weight="duotone" />
-                  {site.email}
-                </a>
-              </li>
-              <li>
-                <a
-                  href={site.linkedin}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="inline-flex items-center gap-2 text-sm text-muted transition-colors hover:text-accent"
-                >
-                  <LinkedinLogo size={18} weight="duotone" />
-                  LinkedIn
-                </a>
-              </li>
-              <li>
-                <a
-                  href={site.github}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="inline-flex items-center gap-2 text-sm text-muted transition-colors hover:text-accent"
-                >
-                  <GithubLogo size={18} weight="duotone" />
-                  GitHub
-                </a>
-              </li>
-            </ul>
-          </div>
+          <ul className="mt-8 flex flex-col items-center gap-3 sm:flex-row sm:flex-wrap sm:justify-center sm:gap-6">
+            <li>
+              <a
+                href={`mailto:${site.email}`}
+                className="inline-flex items-center gap-2 text-sm text-muted transition-colors hover:text-accent"
+              >
+                <EnvelopeSimple size={18} weight="duotone" />
+                {site.email}
+              </a>
+            </li>
+            <li>
+              <a
+                href={site.linkedin}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="inline-flex items-center gap-2 text-sm text-muted transition-colors hover:text-accent"
+              >
+                <LinkedinLogo size={18} weight="duotone" />
+                LinkedIn
+              </a>
+            </li>
+            <li>
+              <a
+                href={site.github}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="inline-flex items-center gap-2 text-sm text-muted transition-colors hover:text-accent"
+              >
+                <GithubLogo size={18} weight="duotone" />
+                GitHub
+              </a>
+            </li>
+          </ul>
 
           <a
             href={`mailto:${site.email}`}
-            className="inline-flex h-12 shrink-0 items-center justify-center rounded-full bg-accent px-7 text-sm font-semibold text-bg accent-glow transition-colors hover:bg-accent-hover active:scale-[0.98]"
+            className="mt-8 inline-flex h-12 items-center justify-center rounded-full bg-accent px-7 text-sm font-semibold text-bg accent-glow transition-colors hover:bg-accent-hover"
           >
             Get in Touch
           </a>
         </motion.div>
 
-        <div className="mt-10 flex flex-col items-center justify-between gap-4 sm:flex-row">
+        <div className="mt-8 flex flex-col items-center gap-3 sm:flex-row sm:gap-6">
           <p className="text-xs text-muted">
-            © {new Date().getFullYear()} {site.fullName}. All rights reserved.
+            © {new Date().getFullYear()} {site.fullName}
           </p>
-          <a
-            href="#top"
-            className="inline-flex items-center gap-2 text-xs font-medium text-muted transition-colors hover:text-accent"
+          <button
+            type="button"
+            onClick={() => goTo("top")}
+            className="text-xs font-medium text-muted transition-colors hover:text-accent"
           >
-            Back to Top
-            <ArrowUp size={14} weight="bold" />
-          </a>
+            Back to first slide
+          </button>
         </div>
       </div>
-    </footer>
+    </section>
   );
 }
