@@ -9,6 +9,6 @@ export const slides = [
 
 export type SlideId = (typeof slides)[number]["id"];
 
-/** Shared full-viewport slide shell for PPT snap behavior */
+/** Shared section shell for natural document scrolling. */
 export const slideClassName =
-  "relative flex h-dvh w-full snap-start snap-always flex-col justify-center overflow-hidden px-4 pb-12 pt-20 md:px-8 md:pb-14 md:pt-24";
+  "relative flex min-h-[70vh] w-full flex-col justify-center overflow-hidden px-5 py-20 sm:px-8 md:min-h-[78vh] md:px-10 md:py-28";
