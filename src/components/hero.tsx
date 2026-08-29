@@ -73,7 +73,7 @@ export function Hero() {
             <div className="absolute inset-6 rounded-[1.6rem] bg-[radial-gradient(circle_at_45%_25%,rgba(205,93,36,0.30),transparent_32%),radial-gradient(circle_at_76%_72%,rgba(30,80,140,0.34),transparent_38%)]" />
             <div className="absolute inset-x-4 bottom-0 top-4 overflow-hidden rounded-[1.5rem]">
               <Image
-                src="/images/hero-arwin-original.png"
+                src="/images/hero-arwin-original.jpg"
                 alt="Arwin Renardi"
                 fill
                 priority
