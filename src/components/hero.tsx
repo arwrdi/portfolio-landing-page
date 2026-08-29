@@ -70,17 +70,16 @@ export function Hero() {
           className="relative mx-auto w-full max-w-sm md:max-w-md"
         >
           <div className="liquid-glass relative aspect-[5/4] overflow-hidden rounded-[2rem] p-4 md:aspect-[4/3]">
-            <div className="absolute inset-6 rounded-[1.6rem] bg-[radial-gradient(circle_at_45%_25%,rgba(205,93,36,0.30),transparent_32%),radial-gradient(circle_at_76%_72%,rgba(30,80,140,0.34),transparent_38%)]" />
-            <div className="absolute inset-x-4 bottom-0 top-4 overflow-hidden rounded-[1.5rem]">
+            <div className="absolute inset-6 rounded-[1.6rem] bg-[radial-gradient(circle_at_45%_25%,rgba(205,93,36,0.20),transparent_34%),radial-gradient(circle_at_76%_72%,rgba(30,80,140,0.24),transparent_40%)]" />
+            <div className="absolute inset-x-4 bottom-0 top-4 overflow-hidden rounded-[1.5rem] bg-transparent">
               <Image
                 src="/images/hero-arwin-original.jpg"
                 alt="Arwin Renardi"
                 fill
                 priority
-                className="object-cover object-[50%_28%] scale-[1.08]"
+                className="object-cover object-[50%_12%] scale-[1.04]"
                 sizes="(max-width: 768px) 88vw, 420px"
               />
-              <div className="absolute inset-x-0 bottom-0 h-20 bg-gradient-to-t from-[rgba(7,28,55,0.78)] to-transparent" />
             </div>
             <div className="liquid-pill absolute right-4 top-4 px-3 py-2 text-[11px] leading-5 text-muted">
               Jakarta, Indonesia<br />Open to Remote
