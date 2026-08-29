@@ -47,11 +47,8 @@ export const metadata: Metadata = {
 
 export default function RootLayout({ children }: LayoutProps<"/">) {
   return (
-    <html
-      lang="en"
-      className={`${plusJakarta.variable} ${geistMono.variable} h-full antialiased`}
-    >
-      <body className="page-atmosphere h-dvh overflow-hidden font-sans text-foreground">
+    <html lang="en" className={`${plusJakarta.variable} ${geistMono.variable} antialiased`}>
+      <body className="page-atmosphere min-h-screen font-sans text-foreground">
         {children}
       </body>
     </html>
