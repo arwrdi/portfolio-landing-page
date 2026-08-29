@@ -33,17 +33,18 @@
 }
 
 html {
-  scroll-behavior: auto;
-  height: 100%;
-  overflow: hidden;
+  scroll-behavior: smooth;
+  scroll-padding-top: 5rem;
+  background: var(--bg);
 }
 
 body {
+  margin: 0;
+  min-height: 100%;
+  overflow-x: hidden;
   background: var(--bg);
   color: var(--text);
   font-family: var(--font-sans), system-ui, sans-serif;
-  height: 100%;
-  overflow: hidden;
 }
 
 .page-atmosphere {
@@ -89,10 +90,13 @@ body {
 }
 
 @media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+
   *,
   *::before,
   *::after {
-    scroll-behavior: auto !important;
     transition-duration: 0.01ms !important;
     animation-duration: 0.01ms !important;
     animation-iteration-count: 1 !important;
