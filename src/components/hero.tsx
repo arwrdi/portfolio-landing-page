@@ -67,19 +67,20 @@ export function Hero() {
           initial={reduce ? false : { opacity: 0, scale: 0.96, y: 14 }}
           animate={{ opacity: 1, scale: 1, y: 0 }}
           transition={{ duration: 0.6, delay: 0.08 }}
-          className="relative mx-auto w-full max-w-md"
+          className="relative mx-auto w-full max-w-sm md:max-w-md"
         >
-          <div className="liquid-glass relative aspect-[4/5] overflow-hidden rounded-[2rem] p-4 md:aspect-[5/6]">
-            <div className="absolute inset-6 rounded-[1.6rem] bg-[radial-gradient(circle_at_50%_28%,rgba(205,93,36,0.32),transparent_32%),radial-gradient(circle_at_76%_68%,rgba(30,80,140,0.30),transparent_36%)]" />
-            <div className="absolute bottom-0 left-1/2 h-[82%] w-[78%] -translate-x-1/2">
+          <div className="liquid-glass relative aspect-[5/4] overflow-hidden rounded-[2rem] p-4 md:aspect-[4/3]">
+            <div className="absolute inset-6 rounded-[1.6rem] bg-[radial-gradient(circle_at_45%_25%,rgba(205,93,36,0.30),transparent_32%),radial-gradient(circle_at_76%_72%,rgba(30,80,140,0.34),transparent_38%)]" />
+            <div className="absolute inset-x-4 bottom-0 top-4 overflow-hidden rounded-[1.5rem]">
               <Image
-                src="/images/arwin-portrait-transparent.png"
+                src="/images/hero-arwin-original.png"
                 alt="Arwin Renardi"
                 fill
                 priority
-                className="object-contain object-bottom"
-                sizes="(max-width: 768px) 78vw, 380px"
+                className="object-cover object-[50%_28%] scale-[1.08]"
+                sizes="(max-width: 768px) 88vw, 420px"
               />
+              <div className="absolute inset-x-0 bottom-0 h-20 bg-gradient-to-t from-[rgba(7,28,55,0.78)] to-transparent" />
             </div>
             <div className="liquid-pill absolute right-4 top-4 px-3 py-2 text-[11px] leading-5 text-muted">
               Jakarta, Indonesia<br />Open to Remote
