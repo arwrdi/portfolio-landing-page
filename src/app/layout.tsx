@@ -14,19 +14,41 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "Arwin Renardi | Mobile & Web Developer",
+  title: "Arwin Renardi | Flutter Developer",
   description:
-    "Mobile & Web Developer with 3+ years building cross-platform apps and enterprise web systems. Based in Jakarta, Indonesia.",
+    "Flutter Developer with 3+ years of software development experience building enterprise and financial mobile applications, with full-stack experience in Next.js, TypeScript, Supabase, and PostgreSQL.",
+  keywords: [
+    "Arwin Renardi",
+    "Flutter Developer",
+    "Dart Developer",
+    "Mobile Developer",
+    "Riverpod",
+    "Firebase",
+    "Next.js",
+    "Jakarta",
+    "Indonesia",
+  ],
+  authors: [{ name: "Arwin Renardi" }],
+  creator: "Arwin Renardi",
+  openGraph: {
+    title: "Arwin Renardi | Flutter Developer",
+    description:
+      "Flutter-focused developer building enterprise, financial, and full-stack products.",
+    type: "website",
+    locale: "en_US",
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "Arwin Renardi | Flutter Developer",
+    description:
+      "Flutter-focused developer building enterprise, financial, and full-stack products.",
+  },
 };
 
 export default function RootLayout({ children }: LayoutProps<"/">) {
   return (
-    <html
-      lang="en"
-      className={`${plusJakarta.variable} ${geistMono.variable} h-full antialiased`}
-    >
-      <body className="page-atmosphere h-dvh overflow-hidden font-sans text-foreground">
-        <div className="noise-overlay" aria-hidden />
+    <html lang="en" className={`${plusJakarta.variable} ${geistMono.variable} antialiased`}>
+      <body className="page-atmosphere min-h-screen font-sans text-foreground">
         {children}
       </body>
     </html>

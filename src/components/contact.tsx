@@ -1,93 +1,70 @@
 "use client";
 
-import {
-  EnvelopeSimple,
-  GithubLogo,
-  LinkedinLogo,
-} from "@phosphor-icons/react";
+import { EnvelopeSimple, GithubLogo, LinkedinLogo } from "@phosphor-icons/react";
 import { motion, useReducedMotion } from "motion/react";
 import { site } from "@/lib/data";
 import { slideClassName } from "@/lib/slides";
-import { useSlides } from "@/components/slide-provider";
 
 export function Contact() {
   const reduce = useReducedMotion();
-  const { goTo } = useSlides();
 
   return (
     <section id="contact" className={slideClassName}>
-      <div className="relative z-10 mx-auto flex w-full max-w-3xl flex-col items-center text-center">
+      <div className="liquid-blob liquid-blob-orange -right-28 bottom-8 h-64 w-64" />
+      <div className="relative z-10 mx-auto w-full max-w-6xl">
         <motion.div
-          className="glass-panel card-glow w-full p-8 md:p-10"
-          initial={reduce ? false : { opacity: 0, y: 36, scale: 0.95 }}
-          whileInView={{ opacity: 1, y: 0, scale: 1 }}
-          viewport={{ once: false, amount: 0.4 }}
-          transition={{ type: "spring", stiffness: 120, damping: 16 }}
+          className="liquid-glass grid gap-8 rounded-[2rem] p-7 md:grid-cols-[1.2fr_0.8fr] md:p-10"
+          initial={reduce ? false : { opacity: 0, y: 24 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true, amount: 0.35 }}
         >
-          <p className="font-mono text-xs uppercase tracking-[0.2em] text-accent">
-            Contact
-          </p>
-          <h2 className="mt-3 text-3xl font-bold tracking-tight text-foreground md:text-4xl">
-            Let&apos;s build something together.
-          </h2>
-          <p className="mx-auto mt-3 max-w-[40ch] text-sm text-muted md:text-base">
-            Open to freelance and contract work across mobile and web.
-          </p>
+          <div>
+            <p className="text-xs font-semibold uppercase tracking-[0.18em] text-accent">Let&apos;s Work Together</p>
+            <h2 className="mt-3 text-3xl font-bold tracking-tight text-foreground md:text-4xl">
+              Let&apos;s build something great.
+            </h2>
+            <p className="mt-3 max-w-xl text-sm leading-6 text-muted md:text-base">
+              Open to remote opportunities and interesting mobile or full-stack projects.
+            </p>
+            <div className="mt-6 flex flex-wrap gap-3">
+              <a href={`mailto:${site.email}`} className="rounded-full bg-accent px-5 py-3 text-sm font-semibold text-white shadow-[0_12px_32px_rgba(205,93,36,0.28)]">
+                Get in Touch
+              </a>
+              <a href="#top" className="liquid-pill px-5 py-3 text-sm font-semibold text-foreground">
+                Back to Top
+              </a>
+            </div>
+          </div>
 
-          <ul className="mt-8 flex flex-col items-center gap-3 sm:flex-row sm:flex-wrap sm:justify-center sm:gap-6">
-            <li>
-              <a
-                href={`mailto:${site.email}`}
-                className="inline-flex items-center gap-2 text-sm text-muted transition-colors hover:text-accent"
-              >
-                <EnvelopeSimple size={18} weight="duotone" />
-                {site.email}
-              </a>
-            </li>
-            <li>
-              <a
-                href={site.linkedin}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="inline-flex items-center gap-2 text-sm text-muted transition-colors hover:text-accent"
-              >
-                <LinkedinLogo size={18} weight="duotone" />
-                LinkedIn
-              </a>
-            </li>
-            <li>
-              <a
-                href={site.github}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="inline-flex items-center gap-2 text-sm text-muted transition-colors hover:text-accent"
-              >
-                <GithubLogo size={18} weight="duotone" />
-                GitHub
-              </a>
-            </li>
-          </ul>
-
-          <a
-            href={`mailto:${site.email}`}
-            className="mt-8 inline-flex h-12 items-center justify-center rounded-full bg-accent px-7 text-sm font-semibold text-bg accent-glow transition-colors hover:bg-accent-hover"
-          >
-            Get in Touch
-          </a>
+          <div className="liquid-glass rounded-3xl p-5">
+            <ul className="space-y-4 text-sm text-muted">
+              <li>
+                <a href={site.github} target="_blank" rel="noopener noreferrer" className="flex items-center gap-3 hover:text-foreground">
+                  <GithubLogo size={18} weight="fill" />
+                  github.com/arwrdi
+                </a>
+              </li>
+              <li>
+                <a href={site.linkedin} target="_blank" rel="noopener noreferrer" className="flex items-center gap-3 hover:text-foreground">
+                  <LinkedinLogo size={18} weight="fill" />
+                  linkedin.com/in/arwin-renardi
+                </a>
+              </li>
+              <li>
+                <a href={`mailto:${site.email}`} className="flex items-center gap-3 hover:text-foreground">
+                  <EnvelopeSimple size={18} weight="fill" />
+                  {site.email}
+                </a>
+              </li>
+            </ul>
+          </div>
         </motion.div>
 
-        <div className="mt-8 flex flex-col items-center gap-3 sm:flex-row sm:gap-6">
-          <p className="text-xs text-muted">
-            © {new Date().getFullYear()} {site.fullName}
-          </p>
-          <button
-            type="button"
-            onClick={() => goTo("top")}
-            className="text-xs font-medium text-muted transition-colors hover:text-accent"
-          >
-            Back to first slide
-          </button>
-        </div>
+        <footer className="mt-8 flex flex-col gap-3 border-t border-white/10 pt-5 text-xs text-muted sm:flex-row sm:items-center sm:justify-between">
+          <span className="font-bold tracking-[-0.04em] text-foreground">AR</span>
+          <span>© {new Date().getFullYear()} {site.fullName}</span>
+          <span>Flutter · Next.js</span>
+        </footer>
       </div>
     </section>
   );
