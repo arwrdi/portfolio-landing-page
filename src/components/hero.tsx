@@ -74,11 +74,11 @@ export function Hero() {
 
             <div className="absolute inset-4 overflow-hidden rounded-[1.5rem] bg-transparent">
               <Image
-                src="/images/hero-arwin-original.jpg"
+                src="/images/arwin-hero.jpg"
                 alt="Arwin Renardi"
                 fill
                 priority
-                className="object-cover object-[50%_24%] md:object-[50%_18%]"
+                className="object-cover object-[50%_20%] md:object-[50%_18%]"
                 sizes="(max-width: 768px) 88vw, 420px"
               />
             </div>
