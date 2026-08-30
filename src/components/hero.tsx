@@ -74,7 +74,7 @@ export function Hero() {
 
             <div className="absolute inset-4 overflow-hidden rounded-[1.5rem] bg-transparent">
               <Image
-                src="/images/arwin-hero.jpg"
+                src="/images/hero-arwin.png"
                 alt="Arwin Renardi"
                 fill
                 priority
